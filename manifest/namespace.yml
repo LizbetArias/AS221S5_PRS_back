@@ -1,0 +1,6 @@
+# kubectl create namespace Lizbet (COMANDO)
+# kubectl apply -f namespace.yml (yml)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: 01lizbetArias

@@ -1,0 +1,35 @@
+# kubectl apply -f deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prs1
+  namespace: 01lizbetArias
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prs1
+  template:
+    metadata:
+      labels:
+        app: prs1
+    spec:
+      containers:
+      - name: prs1
+        image: lizbet/prs1back:latest   # Reemplaza con tu imagen Docker
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: prs1               # Nombre del Secret
+              key: DATABASE_URL                         # Clave dentro del Secret
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: prs1 
+              key: DATABASE_USERNAME
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: prs1
+              key: DATABASE_PASSWORD
