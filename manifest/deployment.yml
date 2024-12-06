@@ -1,35 +1,32 @@
-# kubectl apply -f deployment.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prs1
-  namespace: 01lizbetArias
+  namespace: 01-lizbet
 spec:
-  replicas: 1
+  replicas: 1  # Número de réplicas (puedes aumentar si es necesario)
   selector:
     matchLabels:
-      app: prs1
+      app: prs1 
   template:
     metadata:
       labels:
-        app: prs1
+        app: prs1  
     spec:
       containers:
-      - name: prs1
-        image: lizbet/prs1back:latest   # Reemplaza con tu imagen Docker
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: prs1               # Nombre del Secret
-              key: DATABASE_URL                         # Clave dentro del Secret
-        - name: DATABASE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: prs1 
-              key: DATABASE_USERNAME
-        - name: DATABASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: prs1
-              key: DATABASE_PASSWORD
+      - name: backend  # Nombre del contenedor
+        image: lizbet/prs1back # Imagen Docker del contenedor
+        ports:
+        - containerPort: 8080  # Puerto en el contenedor donde escucha la aplicación
+        resources:
+          requests:
+            memory: "256Mi"  # Memoria mínima solicitada
+            cpu: "250m"      # CPU mínima solicitada
+          limits:
+            memory: "512Mi"  # Memoria máxima permitida
+            cpu: "500m"      # CPU máxima permitida
+
+      - name: frontend
+        image: lizbet/prs1front
+        ports:
+        - containerPort: 4200  # Puerto en el contenedor donde escucha la aplicación

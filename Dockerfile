@@ -22,3 +22,4 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 # docker build -t lizbet/prs1 .
 # docker push lizbet/prs1
 # docker-compose up
+# kubectl port-forward service/prs1 8080:30001 -n 01-lizbet

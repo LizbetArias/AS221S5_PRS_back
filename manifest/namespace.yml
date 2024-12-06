@@ -1,6 +1,12 @@
-# kubectl create namespace Lizbet (COMANDO)
-# kubectl apply -f namespace.yml (yml)
+# kubectl create namespace 01-lizbet (COMANDO)
+# kubectl apply -f namespace.yml (yml) (OPCIONAL, NO RECOMENDADO)
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: 01lizbetArias
+  name: 01-lizbet
+
+# kubectl config view --minify | grep namespace
+
+# kubectl config set-context --current --namespace=01-lizbet
+
+# ES IMPORTANTE CAMBIAR LA CONFIGURACION DEL DEFAUL POR TU NAMESPACE
